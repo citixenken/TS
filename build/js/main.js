@@ -1,50 +1,68 @@
 "use strict";
-let stringArr;
-let planets;
-let mixedData;
-let test = [];
-let bands = [];
-stringArr = ["Alpha", "Beta", "Gamma"];
-planets = ["Mars", 3, "Saturn"];
-mixedData = ["CVT", 1984, false];
-planets = stringArr;
-bands.unshift("Metallica");
-//tuple
-let myTuple = ["Oaxaca", 9, false];
-let mixedArray = ["Jim", 7, true];
-mixedArray = myTuple;
-// myTuple = mixedArray; ❌
-// objects
-let myObj;
-myObj = [];
-console.log(typeof myObj);
-myObj = stringArr;
-myObj = {};
-const userData = {
-    name: "John",
-    age: 16,
+// Type Aliases
+// interface PostID = stringOrNumber; ❌
+//Literal types
+let myName;
+// 👆const myName = "CitixenKen";
+let userName;
+// Functions
+const add = (a, b) => a + b;
+// has no return value
+const logMsg = (message) => {
+    console.log(message);
 };
-let evh;
-let jp;
-evh = { name: "Eddie van Halen", active: false, albums: ["OU812", 1984, 5150] };
-jp = { albums: ["I", "II", "IV"] };
-evh = jp;
-const welcomeGuitarist = (guitarist) => {
-    //   return `Welcome, ${guitarist.name?.toUpperCase()}!`;
-    if (guitarist.name) {
-        return `Welcome, ${guitarist.name.toUpperCase()}!`;
+logMsg("Hey!");
+logMsg(add(5, 12));
+let subtract = function (c, d) {
+    return c - d;
+};
+// interface mathFunction {
+//   (a: number, b: number): number;
+// }
+let multiply = function (c, d) {
+    return c * d;
+};
+logMsg(multiply(3, 5));
+// optional params => should be last on list
+const addAll = (a, b, c) => {
+    if (typeof c !== "undefined") {
+        return a + b + c;
     }
-    return "Hello!";
+    return a + b;
 };
-console.log(welcomeGuitarist(evh));
-// enums
-// "Unlike most TypeScript features, Enums are not a type-level addition to JavaScript but something added to the language and runtime";
-var Grade;
-(function (Grade) {
-    Grade[Grade["U"] = 1] = "U";
-    Grade[Grade["D"] = 2] = "D";
-    Grade[Grade["C"] = 3] = "C";
-    Grade[Grade["B"] = 4] = "B";
-    Grade[Grade["A"] = 5] = "A";
-})(Grade || (Grade = {}));
-console.log(Grade.D);
+// Default param value
+const sumAll = (a, b, c = 7) => {
+    return a + b + c;
+};
+logMsg(addAll(1, 2));
+logMsg(sumAll(1, 2));
+// Rest params => should come at the end
+const total = (a, ...nums) => {
+    return a + nums.reduce((prev, curr) => prev + curr, 0);
+};
+logMsg(total(100, 2, 3, 4));
+// never => for errors and infinite loops
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
+const infinite = () => {
+    let x = 1;
+    while (true) {
+        x++;
+        if (x > 100)
+            break;
+    }
+};
+// custom type guard
+const isNumber = (value) => {
+    return typeof value === "number" ? true : false;
+};
+// use of the never type
+const numberOrString = (value) => {
+    if (typeof value === "string")
+        return "String";
+    if (isNumber(value))
+        return "Number";
+    return createError("This should never happen...");
+};
+logMsg(numberOrString(7));
