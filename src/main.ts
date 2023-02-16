@@ -1,10 +1,25 @@
-let username = "citixenken";
-console.log(username);
+let myName: string = "citixenken";
+let meaningOfLife: number;
+let isLoading: boolean;
+let album: any;
 
-let a: number = 12;
-let b: number = 60;
-let c: number = 1;
+//union type
+let track: string | number;
+let isActive: number | boolean | string;
 
-console.log(a / b);
+// regex
+let re: RegExp;
 
-console.log(c * b);
+myName = "John Wick";
+meaningOfLife = 42;
+isLoading = false;
+album = true;
+track = 1;
+isActive = 0;
+re = /\w+/g;
+
+const sum = (a: number, b: number) => {
+  return a + b;
+};
+
+console.log(sum(6, 12));
